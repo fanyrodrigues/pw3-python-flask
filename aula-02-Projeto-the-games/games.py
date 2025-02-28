@@ -3,16 +3,10 @@ from flask import Flask
 #carregando o frask na  variável app, não precisa informar o tipo de variável
 #dois underline
 app = Flask(__name__)
-@app.route ('/')
-# criando função
-def home():
-    return '<h1> O meu primeiro site em Flask. Bem vindos!!!! <br>  </h1>'
-
 @app.route ('/games')
-
+# criando função
 def games():
     return '<h1> Seja bem vindo a página de games !! <3 <br>  </h1>'
-
 
 if __name__ ==  '__main__':
 #nome = "Fany"
