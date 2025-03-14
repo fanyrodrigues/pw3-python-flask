@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content%}
+    <div class="container">
+        <h1>Área de Consoles</h1>
+        <h4>Os melhores consoles</h4>
+        <hr>
+        <button>
+            <a href="/">Voltar para Home</a>
+        </button>
+        <hr>
+        <p><strong>Console mais vendido do momento:</strong></p>
+
+        {% for chave, valor in console.items() %}
+        <details>
+            <summary>{{ chave }}</summary>
+            <p>{% if chave == 'Valor' %}R$ {{ valor }}{% else %}{{ valor }}{% endif %}</p>
+        </details>
+        {% endfor %}
+
+        <p><strong>O console {{ console['Nome'] }} custa R$ {{ console['Valor'] }}.</strong></p>
+    </div>
+
+
+{% endblock content%}

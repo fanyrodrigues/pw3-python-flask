@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content%}
+    <h1>Bem-vindo ao joguinhos <3 </h1>
+    <hr>
+    <a href="/games">Ir para página de jogos</a>
+    <hr>
+    <a href="/cadgames">Cadastrar jogos</a>
+    <hr>
+    <a href="/consoles">Ir para página de consoles</a>
+    <hr>
+    <a href="/cads">Cadastrar consoles</a>
+
+    <img src="{{url_for('static', filename = 'image/gameconsole.jpg')}}" alt="O joguinho" >
+
+    {% endblock content%}
