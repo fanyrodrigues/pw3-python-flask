@@ -27,6 +27,7 @@ def init_app(app):
 
     @app.route('/cadgames', methods=['GET', 'POST'])
     def cadgames():
+        
         if request.method == "POST":
             if request.form.get('titulo') and request.form.get('ano') and request.form.get('categoria'):
                 gameList.append({'Título': request.form.get('titulo'),
