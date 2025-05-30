@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Bem-vindo a área de consoles</h1>
+<h4>Aqui se encontra os melhores videogames de todos os tempos!</h4>
+<hr />
+<button>
+  <a href="/">Ir Home page</a>
+</button>
+<hr />
+<p>Console mais vendido do momento:</p>
+
+{% for chave, valor in console.items() %} {% if chave == 'Valor' %}
+<details>
+  <summary>{{ chave }}</summary>
+  <p>R$ {{ valor }}</p>
+</details>
+{% else %}
+<details>
+  <summary>{{ chave }}</summary>
+  <p>{{ valor }}</p>
+</details>
+{% endif %} {% endfor %}
+
+<p>O console {{console['Nome']}} custa R${{console['Valor']}}.</p>
+<hr />
+<p>Consoles Cadastrados:</p>
+{% for console in consoleList %} Nome: <strong>{{console.Nome}}</strong><br />
+Valor: <strong>R${{console.Valor}}</strong><br />
+País: <strong>{{console.País}}</strong>
+<br />
+<br />
+{% endfor %} {% endblock content %}
