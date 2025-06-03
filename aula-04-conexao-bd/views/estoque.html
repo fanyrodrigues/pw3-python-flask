@@ -1,22 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Controle de Estoque: </h2><br>
+<h2>Controle de Estoque</h2><br>
+
+<!-- Formulário de cadastro -->
 <details>
-    <summary>[ Cadastrar Novo Jogo]</summary>
+    <summary>[ Cadastrar Novo Jogo ]</summary>
     <div class="col-md-4">
-        <form action="{{url_for('estoque')}}" method="POST">
+        <form action="{{ url_for('estoque') }}" method="POST">
             <input type="text" name="titulo" placeholder="Título" class="form-control" required>
             <input type="number" name="ano" placeholder="Ano de Lançamento" class="form-control" required>
             <input type="text" name="categoria" placeholder="Categoria" class="form-control" required>
             <input type="text" name="plataforma" placeholder="Plataforma" class="form-control" required>
-            <input type="number" name="preco" placeholder="Preço" class="form-control" required>
+            <input type="number" step="0.01" name="preco" placeholder="Preço" class="form-control" required>
+            <br>
             <input type="submit" value="Cadastrar" class="btn btn-success">
             <input type="reset" value="Limpar" class="btn btn-danger">
         </form>
     </div>
 </details>
+
 <hr>
+
+<!-- Tabela de jogos cadastrados -->
 <table class="table table-bordered table-hover">
     <thead class="table-dark">
         <tr>
@@ -25,25 +31,35 @@
             <th>Categoria</th>
             <th>Plataforma</th>
             <th>Preço</th>
-             <th colspan="2">Ações</th>
+            <th>Quantidade</th>
+            <th colspan="2">Ações</th>
         </tr>
     </thead>
+
     <tbody>
-        {% for game in gamesEmEstoque %}
+        {% for g in gamesEmEstoque %}
         <tr>
-            <td>{{game.titulo}}</td>
-            <td>{{game.ano}}</td>
-            <td>{{game.categoria}}</td>
-            <td>{{game.plataforma}}</td>
-            <td>{{game.preco}}</td>
-            <td><a href="url_for('estoque', id=game.id )"<button class='btn btn-danger">Excluir</button></td></a>
-            <td> <button class='btn btn-danger'> excluir</button></td>td>
+            <td>{{ g.titulo }}</td>
+            <td>{{ g.ano }}</td>
+            <td>{{ g.categoria }}</td>
+            <td>{{ g.plataforma }}</td>
+            <td>R$ {{ g.preco }}</td>
+            <td>{{ g.quantidade }}</td>
 
-           
-            {% endfor %}
+            <!-- Botão de editar -->
+            <td>
+                <a href="{{ url_for('edit', id=g.id) }}" class="btn btn-warning btn-sm">Editar</a>
+            </td>
+
+            <!-- Botão de excluir via POST -->
+            <td> 
+                <form action="{{ url_for('delete', id=g.id) }}" method="POST" onsubmit="return confirm('Deseja excluir {{ g.titulo }}?')">
+                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                </form>
+            </td>
         </tr>
+        {% endfor %}
     </tbody>
-
 </table>
 
 {% endblock content %}

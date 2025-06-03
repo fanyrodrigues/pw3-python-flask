@@ -1,40 +1,56 @@
-{% extends 'base.html' %} {% block content %}
-    <h2>Cadastro de Games</h2>
-    <hr>
-    <form action="{{url_for('cadgames')}}", method="post">
-        <label>Título:</label>
-        <input type="text" name="titulo" class="form-control"  required></input>
-        <label>Ano:</label>
-        <input type="text" name="ano" class="form-control" required></input>
-        <label>Categoria:</label>
-        <input type="text" name="categoria" class="form-control"  required></input>
-        <br>
-        <input type="submit" class="btn btn-success" value="Cadastrar"></input>
-    </form>
-    <br>
-    <hr>
-    <h4>Games Cadastrados: </h4>
-    <table
-        class="table table-bordered table-hover"
-    >
-        <thead>
-            <tr>
-                <th>Título:</th>
-                <th>Ano:</th>
-                <th>Categoria:</th>
-            </thead>
-            <tbody>
-                {% for game in gameList %}
-                <tr>
-                    <td>{{game.Título}}</td>
-                    <td>{{game.Ano}}</td>
-                    <td>{{game.Categoria}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </tr>
-    </table>
-    <hr>
-    <br>
-    <a href="/">Voltar para página Inicial</a>
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Cadastro de Games</h2>
+<hr />
+
+<form action="{{ url_for('cadgames') }}" method="post">
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Título:</label>
+    <input type="text" id="titulo" name="titulo" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label for="ano" class="form-label">Ano:</label>
+    <input type="text" id="ano" name="ano" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label for="categoria" class="form-label">Categoria:</label>
+    <input type="text" id="categoria" name="categoria" class="form-control" required />
+  </div>
+
+  <button type="submit" class="btn btn-success">Cadastrar</button>
+</form>
+
+<hr />
+
+<h4>Games Cadastrados:</h4>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>Título</th>
+      <th>Ano</th>
+      <th>Categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for game in gameList %}
+    <tr>
+      <td>{{ game.Título }}</td>
+      <td>{{ game.Ano }}</td>
+      <td>{{ game.Categoria }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="3" class="text-center">Nenhum game cadastrado.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr />
+
+<a href="{{ url_for('home') }}" class="btn btn-primary">Voltar para página Inicial</a>
 {% endblock content %}

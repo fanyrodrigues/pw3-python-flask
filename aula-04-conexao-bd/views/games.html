@@ -1,45 +1,55 @@
-{% extends 'base.html' %} {% block content %}
-<h1>Bem-vindo ao The Games</h1>
-<h4>Aqui se encontra os melhores jogos</h4>
-<hr />
-<button>
-  <a href="/">Ir Home page</a>
-</button>
-<hr />
-<p>Game mais jogado no momento:</p>
-<!-- Comentário HTML {# {variavel} #}-->
-{# Exemplo de comentário no jinja2 #}
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-3">Bem-vindo ao The Games</h1>
+  <h4 class="mb-4">Aqui se encontram os melhores jogos</h4>
+  <hr />
 
-<!-- Percorrendo o dicionário com forms -->
-{% for chave, valor in game.items() %}
-<details>
-  <summary>{{chave}}</summary>
-  <p>{{valor}}</p>
-</details>
-{% endfor %}
+  <a href="/" class="btn btn-primary mb-4">Ir para Home page</a>
 
-<p>O jogo {{game['Título']}} tem {{2025 - game['Ano']}} anos.</p>
-<hr />
-<p>Estão Jogando no momento:</p>
+  <h5>Game mais jogado no momento:</h5>
+  <div class="mb-4">
+    {% for chave, valor in game.items() %}
+      <details class="mb-2">
+        <summary><strong>{{ chave }}</strong></summary>
+        <p>{{ valor }}</p>
+      </details>
+    {% endfor %}
+  </div>
 
-<ol>
-  {% for jogador in jogadores: %}
-  <li>{{jogador}}</li>
-  {% endfor %}
-</ol>
-<hr />
-<h4>Entrar no jogo:</h4>
-<form action="{{url_for('games')}}" , method="POST">
-  <label for="jogador">Jogador:</label>
-  <input type="text" name="jogador" />
-  <input type="submit" />
-</form>
-<hr />
-<p>Jogos disponiveis:</p>
-{% for game in gameList %} Título: <strong>{{game.Título}}</strong><br />
-Ano: <strong>{{game.Ano}}</strong><br />
-Categoria: <strong>{{game.Categoria}}</strong>
-<br />
-<br />
-{% endfor %}
+  <p><strong>O jogo {{ game['Título'] }} tem {{ 2025 - game['Ano'] }} anos.</strong></p>
+
+  <hr />
+
+  <h5>Estão Jogando no momento:</h5>
+  <ol class="mb-4">
+    {% for jogador in jogadores %}
+      <li>{{ jogador }}</li>
+    {% endfor %}
+  </ol>
+
+  <hr />
+
+  <h4>Entrar no jogo:</h4>
+  <form action="{{ url_for('games') }}" method="POST" class="mb-4">
+    <div class="mb-3">
+      <label for="jogador" class="form-label">Jogador:</label>
+      <input type="text" name="jogador" id="jogador" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Entrar</button>
+  </form>
+
+  <hr />
+
+  <h5>Jogos disponíveis:</h5>
+  <div class="list-group">
+    {% for game in gameList %}
+      <div class="list-group-item mb-2">
+        <p><strong>Título:</strong> {{ game.Título }}</p>
+        <p><strong>Ano:</strong> {{ game.Ano }}</p>
+        <p><strong>Categoria:</strong> {{ game.Categoria }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock content %}

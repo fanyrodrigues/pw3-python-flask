@@ -1,3 +1,4 @@
+
 from flask_sqlalchemy import SQLAlchemy
 
 # Carregando o SQLAlchemy em uma variável

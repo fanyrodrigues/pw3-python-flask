@@ -1,4 +1,22 @@
-* {
-    color: blue;
-    margin: 5px;
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  margin-top: 20px;
+  color: #343a40;
+}
+
+footer p {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.btn-warning {
+  margin-right: 5px;
+}
+
+.table {
+  margin-top: 20px;
 }

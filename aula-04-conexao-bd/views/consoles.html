@@ -1,31 +1,40 @@
-{% extends 'base.html' %} {% block content %}
-<h1>Bem-vindo a área de consoles</h1>
-<h4>Aqui se encontra os melhores videogames de todos os tempos!</h4>
-<hr />
-<button>
-  <a href="/">Ir Home page</a>
-</button>
-<hr />
-<p>Console mais vendido do momento:</p>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-3">Bem-vindo à área de consoles</h1>
+  <h4 class="mb-4">Aqui se encontram os melhores videogames de todos os tempos!</h4>
+  <hr />
 
-{% for chave, valor in console.items() %} {% if chave == 'Valor' %}
-<details>
-  <summary>{{ chave }}</summary>
-  <p>R$ {{ valor }}</p>
-</details>
-{% else %}
-<details>
-  <summary>{{ chave }}</summary>
-  <p>{{ valor }}</p>
-</details>
-{% endif %} {% endfor %}
+  <a href="/" class="btn btn-primary mb-4">Ir para Home page</a>
 
-<p>O console {{console['Nome']}} custa R${{console['Valor']}}.</p>
-<hr />
-<p>Consoles Cadastrados:</p>
-{% for console in consoleList %} Nome: <strong>{{console.Nome}}</strong><br />
-Valor: <strong>R${{console.Valor}}</strong><br />
-País: <strong>{{console.País}}</strong>
-<br />
-<br />
-{% endfor %} {% endblock content %}
+  <h5>Console mais vendido do momento:</h5>
+
+  <div class="mb-4">
+    {% for chave, valor in console.items() %}
+      <details class="mb-2">
+        <summary><strong>{{ chave }}</strong></summary>
+        {% if chave == 'Valor' %}
+          <p>R$ {{ valor }}</p>
+        {% else %}
+          <p>{{ valor }}</p>
+        {% endif %}
+      </details>
+    {% endfor %}
+  </div>
+
+  <p><strong>O console {{ console['Nome'] }} custa R$ {{ console['Valor'] }}.</strong></p>
+
+  <hr />
+
+  <h5>Consoles Cadastrados:</h5>
+  <div class="list-group">
+    {% for c in consoleList %}
+      <div class="list-group-item mb-2">
+        <p><strong>Nome:</strong> {{ c.Nome }}</p>
+        <p><strong>Valor:</strong> R$ {{ c.Valor }}</p>
+        <p><strong>País:</strong> {{ c.País }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
